@@ -189,34 +189,34 @@ Inter tile communication latency of layer 6 : 5029.6 ( 40.62 %)
 ----------------------------------------------
 Entire latency: 1793530.8986497982 ns
 ========================Area Results=================================
-Hardware area: 523721904.0837338 um^2
+Hardware area: 1073964997.90887 um^2
 		crossbar area: 357670092.8000001 um^2
-		DAC area: 19548.16 um^2
-		ADC area: 70656000.0 um^2
+		DAC area: 156385.28 um^2
+		ADC area: 565248000.0 um^2
 		Buffer area: 76875182.06000002 um^2
 		Pooling area: 10570472.963 um^2
-		Other digital part area: 7930608.100733729 um^2
+		Other digital part area: 63444864.80586983 um^2
 			|---adder area: 0.0 um^2
-			|---output-shift-reg area: 83609.60000000002 um^2
-			|---input-reg area: 80462.5511005917 um^2
-			|---output-reg area: 40231.27555029585 um^2
-			|---input_demux area: 159211.52 um^2
-			|---output_mux area: 79605.76 um^2
-			|---joint_module area: 7487487.394082839 um^2
+			|---output-shift-reg area: 668876.8000000002 um^2
+			|---input-reg area: 643700.4088047337 um^2
+			|---output-reg area: 321850.2044023668 um^2
+			|---input_demux area: 1273692.16 um^2
+			|---output_mux area: 636846.08 um^2
+			|---joint_module area: 59899899.15266271 um^2
 Layer 0 :
-     Hardware area: 4554103.513771598 um^2
+     Hardware area: 9338826.068772782 um^2
 Layer 1 :
-     Hardware area: 223151072.17480832 um^2
+     Hardware area: 457602477.3698663 um^2
 Layer 2 :
-     Hardware area: 59203345.679030776 um^2
+     Hardware area: 121404738.89404616 um^2
 Layer 3 :
-     Hardware area: 59203345.679030776 um^2
+     Hardware area: 121404738.89404616 um^2
 Layer 4 :
-     Hardware area: 59203345.679030776 um^2
+     Hardware area: 121404738.89404616 um^2
 Layer 5 :
-     Hardware area: 59203345.679030776 um^2
+     Hardware area: 121404738.89404616 um^2
 Layer 6 :
-     Hardware area: 59203345.679030776 um^2
+     Hardware area: 121404738.89404616 um^2
 ========================Power Results=================================
 Hardware power: 130.08317474863372 W
 		crossbar power: 2.2639687208775 W
@@ -279,6 +279,6 @@ Layer 5 :
      Hardware energy: 3695.9006266268934 nJ
 Layer 6 :
      Hardware energy: 3695.9006266268934 nJ
-Mapping time: 0.4767343997955322
-Hardware modeling time: 0.11467123031616211
-Total simulation time: 0.5914056301116943
+Mapping time: 5.035707235336304
+Hardware modeling time: 0.08571195602416992
+Total simulation time: 5.121419191360474
