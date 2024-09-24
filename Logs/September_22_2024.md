@@ -8,7 +8,7 @@
   - Layer wise latency results : Layer Index,Total Layer Latency (ns),Computing Latency (ns),Intra-Tile Latency (ns),Inter-Tile Latency (ns),One Layer Merge Latency (ns),Hardware Power Consumption (W)
 
 
-Some results:
+Throughput simulation results:
 
 | Edge Context Length 128 | Edge Context Length 4096 |
 |-------------------------|---------------------------|
@@ -17,3 +17,4 @@ Some results:
 | Cloud Context Length 128 | Cloud Context Length 4096 |
 |--------------------------|---------------------------|
 | ![Cloud Context Length 128](../cloud_token_results/tokens_comparison_128.png) | ![Cloud Context Length 4096](../cloud_token_results/tokens_comparison_4096.png) |
+
