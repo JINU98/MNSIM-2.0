@@ -19,3 +19,6 @@ MNSIM-2.0 aims to model the HW performance and NN computing accuracy of Processi
 For more information about MNSIM-2.0, please refer to the MNSIM_manual.pdf and the IEEE TCAD paper of MNSIM 2.0.
 
 *Weights File: https://1drv.ms/f/s!AtForEDTP2-PgkzYkCJNONO9xnX6?e=y4s0XG*
+
+
+Figures : https://colab.research.google.com/drive/1y7swDdEs88rIPmU9FHfiKu2p0hWeDqhs?usp=sharing
