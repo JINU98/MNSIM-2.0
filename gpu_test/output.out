@@ -1,0 +1,67 @@
+------------------------------------
+Configuration Information:
+------------------------------------
+Wed Oct 16 15:55:28 2024       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-PCIE-16GB           Off |   00000000:3B:00.0 Off |                    0 |
+| N/A   33C    P0             37W /  250W |       0MiB /  16384MiB |      1%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  Tesla V100-PCIE-16GB           Off |   00000000:D8:00.0 Off |                    0 |
+| N/A   26C    P0             36W /  250W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Date: Wed Oct 16 15:55:28 EDT 2024
+Time: 15:55:28
+OS: Linux
+Kernel: 3.10.0-514.2.2.el7.x86_64
+Memory: 191844 MB
+GPU Model: Tesla V100-PCIE-16GB
+Tesla V100-PCIE-16GB
+GPU Driver Version: 550.54.15
+550.54.15
+CUDA Version: V12.1.66  
+Python Version: Python 3.9.20
+NumPy Version: 2.0.2
+PyTorch Version: 2.4.1
+Project Directory: /work/jmalekar/MNSIM-2.0
+PWD: /work/jmalekar/MNSIM-2.0/gpu_test
+GPUs: 0
+CPUS: 28
+HOST: node396
+Python: /work/jmalekar/MNSIM-2.0/gpu_test/env/bin/python
+CONDA: /work/jmalekar/MNSIM-2.0/gpu_test/env
+Partition: gpu-v100-16gb
+Job ID: 17414631
+User: jmalekar
+Running command:
+python test_opt.py
+
+------------------------------------
+------------------------------------
+Testing OPT performance on available GPUs:
+Using device: cuda
+facebook/opt-1.3b: 82.28 tokens/second
+Using device: cuda
+facebook/opt-2.7b: 49.52 tokens/second
+Using device: cuda
+Error testing facebook/opt-6.7b: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 15.77 GiB of which 54.19 MiB is free. Including non-PyTorch memory, this process has 15.71 GiB memory in use. Of the allocated memory 15.25 GiB is allocated by PyTorch, and 97.91 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Performance test completed.
+Elapsed Time for  stage (D:H:M:S:MS): 0:0:6:9:327
+------------------------------------
+------------------------------------
+
