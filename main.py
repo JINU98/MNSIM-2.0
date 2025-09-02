@@ -31,6 +31,12 @@ def main():
     parser = argparse.ArgumentParser(description='MNSIM example')
     parser.add_argument("-AutoDelete", "--file_auto_delete", default=True,
         help="Whether delete the unnecessary files automatically")
+    parser.add_argument("-d", "--embedding_dimension", default=False,
+        help="transformer model embedding dimension")
+    parser.add_argument("-dff", "--feed_forward", default=False,
+        help="transformer model feed forward dimension")
+    parser.add_argument("-b", "--weight_bit", default=False,
+        help="quantization weight bit")
     parser.add_argument("-HWdes", "--hardware_description", default=SimConfig_path,
         help="Hardware description file location & name, default:/MNSIM_Python/SimConfig.ini")
     parser.add_argument("-Weights", "--weights", default=weights_file_path,
@@ -71,7 +77,7 @@ def main():
 
     mapping_start_time = time.time()
     __TestInterface = TrainTestInterface(network_module=args.NN, dataset_module='MNSIM.Interface.cifar10',  
-        SimConfig_path=args.hardware_description, weights_file=args.weights, device=args.device)
+        SimConfig_path=args.hardware_description,b=args.weight_bit ,d=args.embedding_dimension, dff=args.feed_forward, weights_file=args.weights, device=args.device)
     structure_file = __TestInterface.get_structure()
     TCG_mapping = TCG(structure_file, args.hardware_description)
     # print(TCG_mapping.max_inbuf_size)

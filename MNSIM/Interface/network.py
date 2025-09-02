@@ -182,9 +182,11 @@ class NetworkGraph(nn.Module):
         # load weights
         self.load_state_dict(tmp_state_dict)
 
-def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
+def get_net(b,d,dff,hardware_config = None, cate = 'lenet', num_classes = 10):
     # define the NN structure
     # initial config
+    d=int(d)
+    dff=int(dff)
     if hardware_config == None:
         hardware_config = {'xbar_size': 512, 'input_bit': 2, 'weight_bit': 1, 'ADC_quantize_bit': 10, 'DAC_num': 256}
     # layer_config_list, quantize_config_list, and input_index_list
@@ -193,7 +195,7 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
     input_index_list = []
     # layer by layer
     # add new NN models here (conv/fc is followed by one bn layer automatically):
-    assert cate in ['lenet', 'vgg16', 'vgg8', 'alexnet', 'resnet18']
+    assert cate in ['lenet', 'vgg16', 'vgg8', 'alexnet', 'resnet18','transformers']
     if cate.startswith('lenet'):
         layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 6, 'kernel_size': 5})
         layer_config_list.append({'type': 'relu'})
@@ -208,6 +210,21 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
         layer_config_list.append({'type': 'dropout'})
         layer_config_list.append({'type': 'relu'})
         layer_config_list.append({'type': 'fc', 'in_features': 84, 'out_features': num_classes})
+    elif cate.startswith('transformers'):
+        layer_config_list.append({'type': 'conv', 'in_channels': 1, 'out_channels': 1, 'kernel_size': 1})
+        layer_config_list.append({'type': 'view'})
+        layer_config_list.append({'type': 'fc', 'in_features': d, 'out_features': d})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'fc', 'in_features': d, 'out_features': d})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'fc', 'in_features': d, 'out_features': d})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'fc', 'in_features': d, 'out_features': d})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'fc', 'in_features': d, 'out_features': dff})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'fc', 'in_features': dff, 'out_features': d})
+
     elif cate.startswith('vgg16'):
         layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 64, 'kernel_size': 3, 'padding': 1})
         layer_config_list.append({'type': 'relu'})
@@ -352,21 +369,23 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
     else:
         assert 0, f'not support {cate}'
     for i in range(len(layer_config_list)):
-        quantize_config_list.append({'weight_bit': 9, 'activation_bit': 9, 'point_shift': -2})
+        quantize_config_list.append({'weight_bit': 2, 'activation_bit': 8, 'point_shift': -2})
         if 'input_index' in layer_config_list[i]:
             input_index_list.append(layer_config_list[i]['input_index'])
         else:
             input_index_list.append([-1])
                 # by default: the inputs of the current layer come from the outputs of the previous layer
-    input_params = {'activation_scale': 1. / 255., 'activation_bit': 9, 'input_shape': (1, 3, 32, 32)}
+    # input_params = {'activation_scale': 1. / 255., 'activation_bit': 2, 'input_shape': (1, 1, 32, 32)}
+    input_params = {'activation_scale': 1. / 255., 'activation_bit': 8, 'input_shape': (1, 1, 1, d)}
         # change the input_shape according to datasets
     # add bn for every conv
     L = len(layer_config_list)
     for i in range(L-1, -1, -1):
         if layer_config_list[i]['type'] == 'conv':
             # continue
+            print("weight bit",int(b))
             layer_config_list.insert(i+1, {'type': 'bn', 'features': layer_config_list[i]['out_channels']})
-            quantize_config_list.insert(i+1, {'weight_bit': 9, 'activation_bit': 9, 'point_shift': -2})
+            quantize_config_list.insert(i+1, {'weight_bit': int(b), 'activation_bit': 8, 'point_shift': -2})
             # update the input_index_list after adding bn layer
             input_index_list.insert(i+1, [-1])
             for j in range(i + 2, len(layer_config_list), 1):
